@@ -6,6 +6,3 @@
 #include <cppQueue.h>
 #include <Card.h>
 
-void uid_queue(){
-    cppQueue cards_queue(sizeof(Card), 10);
-}
