@@ -7,6 +7,7 @@
 
 #include <Arduino.h>
 #include <WiFi.h>
+#include "TimeClock.h"
 
 /**
  * Attempt to connect to the Wi-Fi Network using the global variables credentials
@@ -25,5 +26,6 @@ IPAddress activate_internal_wifi();
  */
 String get_mac_address();
 
+void send_uid(Card card);
 
 #endif //CONNECTIONS_H

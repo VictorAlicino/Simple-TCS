@@ -3,15 +3,17 @@
 //
 #include <Arduino.h>
 #include <WiFi.h>
-#include <Preferences.h>
-#include <DNSServer.h>
+#include <HTTPClient.h>
 #include <Connections.h>
 #include <UserConfig.h>
+#include <TimeClock.h>
 #include <Hardware.h>
 
 extern String device_name;
 extern String ssid;
 extern String pass;
+extern WiFiClient *wifi_client;
+extern HTTPClient *http_client;
 extern int WIFI_CONNECTION_STATUS;
 
 struct network_connection_error: public std::exception
@@ -80,6 +82,13 @@ IPAddress activate_internal_wifi(){
     WiFi.setHostname(name.c_str());
     ESP_LOGI(TAG, "Configuration Access Point set on %s", IP.toString().c_str());
     return IP;
+}
+
+void send_uid(Card card){
+    http_client->begin(*wifi_client, SERVER_URL);
+    http_client->addHeader("content-type", "application/octet-stream");
+    http_client->POST(card.to_string("-"));
+    http_client->end();
 }
 
 String get_mac_address(){
