@@ -85,9 +85,15 @@ IPAddress activate_internal_wifi(){
 }
 
 void send_uid(Card card){
-    http_client->begin(*wifi_client, SERVER_URL);
+    ESP_LOGD(__FILE__, "");
+    //String path = "/hardware_api/esp_data/rfid_uid/";
+    String path = "/api/v0/member/";
+    http_client->begin(*wifi_client, String(SERVER_URL) + path);
+    ESP_LOGD(__FILE__, "");
     http_client->addHeader("content-type", "application/octet-stream");
+    ESP_LOGD(__FILE__, "");
     http_client->POST(card.to_string("-"));
+    ESP_LOGD(__FILE__, "");
     http_client->end();
 }
 

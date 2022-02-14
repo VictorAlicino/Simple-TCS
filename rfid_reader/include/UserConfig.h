@@ -19,18 +19,18 @@
  * a failure.
  * This Macro is an Integer. Example: WIFI_ATTEMPTS 5
  */
-#define WIFI_ATTEMPTS       2
+#define WIFI_ATTEMPTS       5
 // -------------- end of WiFi Configurations  -------------- //
 
 // ---------------- Server Configurations  ----------------- //
-#define SERVER_URL "192.168.1.1"
+#define SERVER_URL "http://192.168.1.108:3000"
 // ------------- end of Server Configurations  ------------- //
 
 // -------------- General Purpose Input/Output   ----------- //
 #define SS_PIN    21
 #define RST_PIN   22
 
-#define BUZZER_PIN 0
+#define BUZZER_PIN 5
 // --------- end General Purpose Input/Output   ------------ //
 
 #define SIZE_BUFFER     18

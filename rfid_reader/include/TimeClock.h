@@ -12,7 +12,7 @@
 class Card : public MFRC522::Uid {
 public:
     explicit Card(MFRC522::Uid UID);
-    String to_string(String separator);
+    String to_string(const String& separator);
 };
 
 class TimeClock{

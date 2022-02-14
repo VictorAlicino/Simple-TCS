@@ -27,7 +27,7 @@ String get_device_name(){
 }
 
 void activate_hardware() {
-    ESP_LOGD("Hardware", "Initializing the Hardware");
+    ESP_LOGD(__FILE__, "Initializing the Hardware");
 
     //Initializing internal LED pin
     pinMode(2, OUTPUT);

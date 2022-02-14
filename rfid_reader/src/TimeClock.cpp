@@ -7,12 +7,14 @@
 
 Card::Card(MFRC522::Uid UID) : MFRC522::Uid{UID}{}
 
-String Card::to_string(String separator) {
+String Card::to_string(const String& separator) {
     String UID = "";
     for (byte i = 0; i < this->size; i++)
     {
         UID.concat(String(this->uidByte[i] < 0x10 ? (separator + "0") : separator));
         UID.concat(String(this->uidByte[i], HEX));
     }
+    UID.toUpperCase();
+    UID = UID.substring(1, UID.length());
     return UID;
 }

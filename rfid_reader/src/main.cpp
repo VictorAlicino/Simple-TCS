@@ -42,48 +42,12 @@ void setup(){
     activate_hardware();
 
     //Wi-Fi Definitions
-    ssid = WIFI_SSID;
-    pass = WIFI_PASSWORD;
-    WIFI_CONNECTION_STATUS = READY_TO_CONNECT;
+    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+    while(WiFiClass::status() != WL_CONNECTED){
 
-    ESP_LOGD(TAG, "The Wi-Fi Credentials are code locked!");
-    ESP_LOGD(TAG, "SSID: %s", ssid.c_str());
-    ESP_LOGD(TAG, "Password: %s", pass.c_str());
-
-    /**
-    * The system will try to connect to Wi-Fi the number of times defined in WIFI_ATTEMPTS Macro
-    * If the connections failed in all attempts, the device will ask in the Serial Port for a Reboot
-    */
-    int vote = 0; //If Wi-Fi vote positive, the system will finish the configuration
-    int counter = 0;
-
-    while(counter < WIFI_ATTEMPTS){
-        if(WIFI_CONNECTION_STATUS == READY_TO_CONNECT){
-            try{
-                wifi_connect();
-                vote++;
-            }catch(...){
-                ESP_LOGE("Wi-Fi Connection Error");
-            }
-        }
-        counter++;
-        ESP_LOGD(TAG, "%d connection attempts left before system failure", WIFI_ATTEMPTS - counter);
     }
 
-    //Capturing possible erros
-    if(counter == WIFI_ATTEMPTS){
-        ESP_LOGE(TAG, "The system tried to connect to Wi-Fi %d times and failed",
-                 WIFI_ATTEMPTS);
-        ESP_LOGD(TAG, "The following connection(s) failed:");
-        if(WIFI_CONNECTION_STATUS != CONNECTED){
-            ESP_LOGD(TAG, "Wi-Fi Connection failed");
-        }
-        ESP_LOGD(TAG, "Restarting Now...");
-        ESP.restart();
-    }
-    //end of Capturing possible erros
-
-    //Initializing HTTP Client
+        //Initializing HTTP Client
     wifi_client = new WiFiClient();
     http_client = new HTTPClient();
 
@@ -94,11 +58,20 @@ void setup(){
 void loop(){
     if (RFID.PICC_IsNewCardPresent() ) {
         if (RFID.PICC_ReadCardSerial()) {
+            const TickType_t xDelay = 10 / portTICK_PERIOD_MS;
             digitalWrite(2, HIGH);
             Card temp(RFID.uid);
-            send_uid(temp);
-            ESP_LOGD(__FILE__, "RFID Detected || UID: %s", temp.to_string().cstring());
-            buzzer.simple_tone();
+            //send_uid(temp);
+            ESP_LOGD(__FILE__, "RFID Detected || UID: %s", temp.to_string(":").c_str());
+            buzzer.simple_tone(987);
+            vTaskDelay(xDelay*2);
+            buzzer.simple_tone(1174);
+            vTaskDelay(xDelay*4);
+            buzzer.simple_tone(1975);
+            vTaskDelay(xDelay*6);
+            buzzer.simple_tone(1760);
+            vTaskDelay(xDelay*4);
+            buzzer.simple_tone(1479);
             digitalWrite(2, LOW);
         }
     }
