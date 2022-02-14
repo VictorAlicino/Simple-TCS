@@ -63,15 +63,9 @@ void loop(){
             Card temp(RFID.uid);
             //send_uid(temp);
             ESP_LOGD(__FILE__, "RFID Detected || UID: %s", temp.to_string(":").c_str());
-            buzzer.simple_tone(987);
-            vTaskDelay(xDelay*2);
-            buzzer.simple_tone(1174);
-            vTaskDelay(xDelay*4);
-            buzzer.simple_tone(1975);
-            vTaskDelay(xDelay*6);
-            buzzer.simple_tone(1760);
-            vTaskDelay(xDelay*4);
-            buzzer.simple_tone(1479);
+            digitalWrite(13, HIGH);
+            buzzer.card_readed();
+            digitalWrite(13, LOW);
             digitalWrite(2, LOW);
         }
     }

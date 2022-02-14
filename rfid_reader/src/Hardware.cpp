@@ -31,6 +31,8 @@ void activate_hardware() {
 
     //Initializing internal LED pin
     pinMode(2, OUTPUT);
+    pinMode(13, OUTPUT);
+    digitalWrite(13, LOW);
 
     //Initializing RFID Reader
     SPI.begin();

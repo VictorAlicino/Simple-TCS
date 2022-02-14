@@ -57,3 +57,17 @@ void Buzzer::simple_tone(double frequency) {
     vTaskDelay(this->xDelay*100);
     ledcWriteTone(this->channel, 0);
 }
+
+void Buzzer::card_readed(){
+    ledcWriteTone(this->channel, 987);
+    vTaskDelay(xDelay*120);
+    ledcWriteTone(this->channel, 1174);
+    vTaskDelay(xDelay*140);
+    ledcWriteTone(this->channel, 1975);
+    vTaskDelay(xDelay*160);
+    ledcWriteTone(this->channel, 1760);
+    vTaskDelay(xDelay*140);
+    ledcWriteTone(this->channel, 1479);
+    vTaskDelay(xDelay*100);
+    ledcWriteTone(this->channel, 0);
+}

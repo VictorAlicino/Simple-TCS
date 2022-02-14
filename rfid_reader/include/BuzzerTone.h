@@ -24,6 +24,8 @@ public:
 
     void simple_tone(double frequency=1760);
 
+    void card_readed();
+
 };
 
 #endif //V2_BUZZERTONE_H
