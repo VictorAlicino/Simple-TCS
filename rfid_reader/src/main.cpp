@@ -47,7 +47,7 @@ void setup(){
 
     }
 
-        //Initializing HTTP Client
+    //Initializing HTTP Client
     wifi_client = new WiFiClient();
     http_client = new HTTPClient();
 
@@ -61,7 +61,7 @@ void loop(){
             const TickType_t xDelay = 10 / portTICK_PERIOD_MS;
             digitalWrite(2, HIGH);
             Card temp(RFID.uid);
-            //send_uid(temp);
+            send_uid(temp);
             ESP_LOGD(__FILE__, "RFID Detected || UID: %s", temp.to_string(":").c_str());
             digitalWrite(13, HIGH);
             buzzer.card_readed();

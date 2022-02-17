@@ -23,7 +23,7 @@
 // -------------- end of WiFi Configurations  -------------- //
 
 // ---------------- Server Configurations  ----------------- //
-#define SERVER_URL "http://192.168.1.108:3000"
+#define SERVER_URL "http://192.168.1.100:3000"
 // ------------- end of Server Configurations  ------------- //
 
 // -------------- General Purpose Input/Output   ----------- //
