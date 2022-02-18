@@ -26,6 +26,8 @@ IPAddress activate_internal_wifi();
  */
 String get_mac_address();
 
-void send_uid(Card card);
+void send_rfid_to_api(Card card, const String& URL, const String& path);
+
+
 
 #endif //CONNECTIONS_H

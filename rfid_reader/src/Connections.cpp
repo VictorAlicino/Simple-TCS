@@ -8,6 +8,7 @@
 #include <UserConfig.h>
 #include <TimeClock.h>
 #include <Hardware.h>
+#include <array>
 
 extern String device_name;
 extern String ssid;
@@ -84,17 +85,15 @@ IPAddress activate_internal_wifi(){
     return IP;
 }
 
-void send_uid(Card card){
-    ESP_LOGD(__FILE__, "");
-    //String path = "/hardware_api/esp_data/rfid_uid/";
-    String path = "/api/v0/member/";
-    http_client->begin(*wifi_client, String(SERVER_URL) + path);
-    ESP_LOGD(__FILE__, "");
-    http_client->addHeader("content-type", "application/octet-stream");
-    ESP_LOGD(__FILE__, "");
-    http_client->POST(card.to_string("-"));
-    ESP_LOGD(__FILE__, "");
+void send_rfid_to_api(Card card, const String& URL, const String& path){
+    http_client->begin(*wifi_client, URL + path + card.to_string("&"));
+    http_client->addHeader("Content-Type", "application/json");
+    http_client->GET();
     http_client->end();
+}
+
+void received_data_from_api(){
+    String response = http_client->getString();
 }
 
 String get_mac_address(){

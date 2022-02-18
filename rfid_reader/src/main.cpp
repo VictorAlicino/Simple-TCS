@@ -61,7 +61,7 @@ void loop(){
             const TickType_t xDelay = 10 / portTICK_PERIOD_MS;
             digitalWrite(2, HIGH);
             Card temp(RFID.uid);
-            send_uid(temp);
+            send_rfid_to_api(temp, "http://192.168.1.100:3000", "/");
             ESP_LOGD(__FILE__, "RFID Detected || UID: %s", temp.to_string(":").c_str());
             digitalWrite(13, HIGH);
             buzzer.card_readed();
