@@ -7,10 +7,12 @@ class User(models.Model):
         verbose_name='Primeiro Nome',
         max_length=250
     )
+
     last_name = models.CharField(
         verbose_name='Último Nome',
         max_length=250
     )
+
     email = models.EmailField()
 
     def __str__(self):
@@ -28,19 +30,25 @@ class PTIid(models.Model):
         ('OTHER', 'Outro')
     )
 
-    user_id = models.ForeignKey(User, on_delete=models.PROTECT)
+    user_id = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT
+    )
+
     affiliation = models.CharField(
         verbose_name='Instituição',
         max_length=50,
         choices=AFFILIATIONS,
         help_text='Instituição ao qual o usuário é afiliado'
     )
+
     role = models.CharField(
         verbose_name='Cargo',
         blank=True,
         max_length=50,
         help_text='Qual o cargo do usuário no LabIoT'
     )
+
     registration = models.CharField(
         verbose_name='Matrícula',
         help_text='Número de matrícula do usuário no PTI',
@@ -53,10 +61,12 @@ class PTIid(models.Model):
             )
         ]
     )
+
     expire_date = models.DateField(
         verbose_name='Validade',
         help_text='Data de validade do crachá de identificação'
     )
+
     rfid_uid = models.CharField(
         verbose_name='UID do Crachá',
         help_text="Unique Identifier do chip RFID do crachá do usuário",
@@ -80,6 +90,11 @@ class PTIid(models.Model):
 
 
 class TimeCheck(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.PROTECT)
+    user_id = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT
+    )
+
     check_in = models.DateTimeField()
+
     check_out = models.DateTimeField()

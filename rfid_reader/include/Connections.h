@@ -28,6 +28,7 @@ String get_mac_address();
 
 void send_rfid_to_api(Card card, const String& URL, const String& path);
 
+void received_data_from_api();
 
 
 #endif //CONNECTIONS_H
