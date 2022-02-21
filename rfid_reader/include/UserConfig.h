@@ -30,7 +30,7 @@
 #define SS_PIN    21
 #define RST_PIN   22
 
-#define BUZZER_PIN 5
+#define BUZZER_PIN 13
 // --------- end General Purpose Input/Output   ------------ //
 
 #define SIZE_BUFFER     18
